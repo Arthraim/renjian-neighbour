@@ -28,11 +28,10 @@ class MainHandler(webapp.RequestHandler):
         template_values = {"rens": rens}
         path = os.path.join(os.path.dirname(__file__), 'template/index.html')
         self.response.out.write(template.render(path, template_values))
-            
+
 
 class Neighbourhood(webapp.RequestHandler):
     def post(self):
-        ren = Renjianer()
         screen_name = cgi.escape(self.request.get('content'))
         
         rnjn_url = 'http://api.renjian.com/'
@@ -42,6 +41,7 @@ class Neighbourhood(webapp.RequestHandler):
         if result.status_code == 200:
             json = result.content
             you = simplejson.loads(str(json))
+            ren = Renjianer(key_name=you['screen_name'])
             ren.user_name = you['screen_name']
             ren.user_id = you['id']
         else:
@@ -78,7 +78,8 @@ class Neighbourhood(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'template/result.html')
         self.response.out.write(template.render(path, template_values))
         #self.redirect('/')
-        
+
+
 def main():
     application = webapp.WSGIApplication([
                                           ('/', MainHandler),
