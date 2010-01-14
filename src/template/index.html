@@ -2,6 +2,7 @@
 
 {% block content %}	
 	<!-- form -->
+	<h2 id="pages" class="table-title">Input your SCREEN_NAME or ID:</h2>
 	<div class="group"> 
     <form id="find" action="/neighbourhood" method="post"> 
         <div> 
@@ -13,7 +14,7 @@
     <hr />
 
     <!-- rencently users -->    
-    <h2 id="pages" class="table-title">Rencently:</h2> 
+    <h2 id="pages" class="table-title">Rencently:</h2>
     <ul class="disclosure table group"> 
         {% for ren in rens %}
             <li>
