@@ -1,58 +1,88 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title></title>
-</head>
-<body>
-    <div class='you_info'>
-	    <p>Your Infomation:</p>
-	    <p>{{ you.id }}</p>
-	    <p>{{ you.name }}</p>
-	    <p>{{ you.screen_name }}</p>
-	    <p>{{ you.description }}</p>
+{% extends "base.html" %}
+
+{% block content %}
+    <script type="text/javascript"> 
+    <!--
+    CFMOBI_IS_PAGE = false; CFMOBI_PAGES_TAB = 'Right Neighbour'; CFMOBI_POSTS_TAB = 'Left Neighbour';  var CFMOBI_TOUCH = ["iPhone","iPod","Android","BlackBerry9530","LG-TU915 Obigo","LGE VX","webOS"];
+    for (var i = 0; i < CFMOBI_TOUCH.length; i++) {
+        if (navigator.userAgent.indexOf(CFMOBI_TOUCH[i]) != -1) {
+            document.write('<link rel="stylesheet" href="..\/css\/touch.css" type="text\/css" media="screen" charset="utf-8" \/>');
+            break;
+        }
+    }
+    document.write('<script type=\'text\/javascript\' src=\'http:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/1.4.0\/jquery.min.js\'><\/script><script type=\'text\/javascript\' src=\'http:\/\/carringtontheme.com\/wp\/wp-content\/themes\/carrington-mobile\/js\/mobile.js?ver=1.0\'><\/script>');
+    //--></script>
+
+    <p id="next-prev-top" class="pagination"><span>&laquo;</span> 
+	<span class="next"><a href="/" rel="next">renjian-Neighbour</a></span> 
+	<span>|</span> 
+	<span class="prev"><a href="http://renjian.com/" rel="prev">renjian.com</a></span> 
+	<span>&raquo;</span></p> 
+	
+	<div id="content" class="group"> 
+		<h1>{{ you.screen_name }}</h1>
+		<p>{{ you.name }} | {{ you.id }}</p>
+		<div class="clear"></div> 
+		<p class="small">Followers: {{ you.followers_count }} | Following: {{ you.following_count }} | Favorites: {{ you.favourites_count }} | Score: {{ you.score }} | Registered on: {{ you.created_at|truncatewords:"1" }}</p>
+		<h2 id="comments" class="title-divider"><span>Bio:</span></h2> 
+		<p>{{ you.description }}</p> 
+		<p class="small"><cite><a href='{{ you.url }}' class='url' target="_blank">{{ you.url }}</a></cite></p> 
+	</div> 
+		 
+	<p id="next-prev-bottom" class="pagination"><span>&laquo;</span> 
+	<span class="next"><a href="/" rel="next">renjian-Neighbour</a></span> 
+	<span>|</span> 
+	<span class="prev"><a href="http://renjian.com/" rel="prev">renjian.com</a></span> 
+	<span>&raquo;</span></p> 
+	<hr /> 
+
+	<div class="tabbed"> 
+	    <div id="recent_tab"> 
+	        <hr /> 
+	        <h2 class="table-title" id="recent">Left Neighbour</h2> 
+	        <ul class="disclosure table group"> 
+                <li class="page_item">
+                <a>
+                    <h1>{{ left.screen_name }}</h1>
+			        <p>{{ left.name }} | {{ left.id }}</p>
+			        <div class="clear"></div> 
+			        <p class="small">Followers: {{ left.followers_count }} | Following: {{ left.following_count }} | Favorites: {{ left.favourites_count }} | Score: {{ left.score }} | Registered on: {{ left.created_at|truncatewords:"1" }}</p>
+			    </a>
+                </li>
+                <li class="page_item">
+                <a>
+                    <p>{{ left.description }} 
+                    <a href='{{ left.url }}' target="_blank">{{ left.url }}</a></p> 
+                </a>
+                </li>
+	        </ul> 
+	    </div> 
+	    <div id="pages_tab"> 
+	        <hr /> 
+	        <h2 class="table-title" id="pages">Right Neighbour</h2> 
+	        <ul class="disclosure table group"> 
+	            <li class="page_item">
+                <a>
+                    <h1>{{ right.screen_name }}</h1>
+                    <p>{{ right.name }} | {{ right.id }}</p>
+                    <div class="clear"></div> 
+                    <p class="small">Followers: {{ right.followers_count }} | Following: {{ right.following_count }} | Favorites: {{ right.favourites_count }} | Score: {{ right.score }} | Registered on: {{ right.created_at|truncatewords:"1" }}</p>
+                </a>
+                </li>
+                <li class="page_item">
+                <a>
+                    <p>{{ right.description }} 
+                    <a href='{{ right.url }}' target="_blank">{{ right.url }}</a></p> 
+                </a>
+                </li> 
+	        </ul> 
+	    </div> 
+	</div> 
+	<hr /> 
+
+    <!--div class='you_info'>
 	    <p>{{ you.profile_image_url }}</p>
-	    <p>{{ you.url }}</p>
 	    <p>{{ you.protected }}</p>
-	    <p>{{ you.created_at }}</p>
-	    <p>{{ you.followers_count }}</p>
-	    <p>{{ you.following_count }}</p>
-	    <p>{{ you.favourites_count }}</p>
-	    <p>{{ you.score }}</p>
 	    <p>{{ you.gender }}</p>
-    </div>
-    
-    <div class='left_info'>
-	    <p>Left Neighbour:</p>
-	    <p>{{ left.id }}</p>
-	    <p>{{ left.name }}</p>
-        <p>{{ left.screen_name }}</p>
-        <p>{{ left.description }}</p>
-        <p>{{ left.profile_image_url }}</p>
-        <p>{{ left.url }}</p>
-        <p>{{ left.protected }}</p>
-        <p>{{ left.created_at }}</p>
-        <p>{{ left.followers_count }}</p>
-        <p>{{ left.following_count }}</p>
-        <p>{{ left.favourites_count }}</p>
-        <p>{{ left.score }}</p>
-        <p>{{ left.gender }}</p>
-    </div>
-    
-    <div class='right_info'>
-	    <p>Right Neighbour:</p>
-	    <p>{{ right.id }}</p>
-	    <p>{{ right.name }}</p>
-        <p>{{ right.screen_name }}</p>
-        <p>{{ right.description }}</p>
-        <p>{{ right.profile_image_url }}</p>
-        <p>{{ right.url }}</p>
-        <p>{{ right.protected }}</p>
-        <p>{{ right.created_at }}</p>
-        <p>{{ right.followers_count }}</p>
-        <p>{{ right.following_count }}</p>
-        <p>{{ right.favourites_count }}</p>
-        <p>{{ right.score }}</p>
-        <p>{{ right.gender }}</p>
-    </div>
-</body>
-</html>
+    </div-->
+{% endblock %}

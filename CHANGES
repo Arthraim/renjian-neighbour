@@ -1,6 +1,8 @@
 2010-01-14
     Use a new template index.html now.
     index.html now has a skin.
+    Added a template named base.html, index.html now extending from this template.
+    result.html now has a skin, added mobile.js, touch.css for it.
 
 2010-01-13
     Complete based works.
