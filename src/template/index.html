@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>renjian-neighbour</title>
+<link type="text/css" rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <form action="/neighbourhood" method="post">
+        <input type="text" name="content" rows="3" cols="60"></input>
+        <input type="submit" value="Find Neighbour">
+    </form>
+    <ul>
+        {% for ren in rens %}
+            <li>{{ ren.user_name }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

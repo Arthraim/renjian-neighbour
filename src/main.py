@@ -24,27 +24,11 @@ class MainHandler(webapp.RequestHandler):
 
     def get(self):
         #self.response.headers['Content-Type'] = 'text/plain'
-        self.response.out.write("""
-          <html>
-            <head>
-              <link type="text/css" rel="stylesheet" href="/css/style.css" />
-            </head>
-            <body>
-              <form action="/neighbourhood" method="post">
-                <input type="text" name="content" rows="3" cols="60"></input>
-                <input type="submit" value="Find Neighbour">
-              </form>
-              <ul>""")
-        
         rens = db.GqlQuery("SELECT * FROM Renjianer ORDER BY date DESC")
-
-        for ren in rens:
-            self.response.out.write('<li>%s</li>' % ren.user_name)
+        template_values = {"rens": rens}
+        path = os.path.join(os.path.dirname(__file__), 'template/index.html')
+        self.response.out.write(template.render(path, template_values))
             
-        self.response.out.write("""
-              </ul>
-            </body>
-          </html>""")
 
 class Neighbourhood(webapp.RequestHandler):
     def post(self):
