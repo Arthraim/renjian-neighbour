@@ -34,7 +34,7 @@ class Neighbourhood(webapp.RequestHandler):
     def post(self):
         ren = Renjianer()
         screen_name = cgi.escape(self.request.get('content'))
-
+        
         rnjn_url = 'http://api.renjian.com/'
         # 1、请求user信息
         user_url = rnjn_url + 'users/show.json?id=' + screen_name;
