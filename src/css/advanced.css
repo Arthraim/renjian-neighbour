@@ -344,3 +344,17 @@ ul.table.disclosure .pagination .prev a {
 	padding:.3em .5em;
 	text-decoration:none;
 }
+.avatar {
+	float: left;
+	position: relative;
+	width: 100px;
+	border-left: 6px;
+	border-left-color: orange;
+	border-left-style: solid;
+}
+.avatar1 {
+	border-left-color: #0B7ECE;
+}
+.avatar2 {
+	border-left-color: #F65A94;
+}

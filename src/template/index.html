@@ -17,18 +17,18 @@
     <h2 id="pages" class="table-title">Rencently:</h2>
     <ul class="disclosure table group"> 
         {% for ren in rens %}
-            <li>
-                <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
-                    {{ ren.user_name }}
-                    <span class="date">{{ ren.date|truncatewords:"1" }}</span>
-                </a>
-            </li>
+	        <li>
+	            <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
+	                {{ ren.user_name }}
+	                <span class="date">{{ ren.date|truncatewords:"1" }}</span>
+	            </a>
+	        </li>
         {% endfor %}
         <li class="pagination">
             <span>&laquo;</span> 
 			<span class="next"></span> 
 			<span>|</span> 
-			<span class="prev"><a href="/users" >See who else found his neighbour</a></span> 
+			<span class="prev"><a href="/users" >See who else found</a></span> 
 			<span>&raquo;</span>
 		</li>
     </ul> 
