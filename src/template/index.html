@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}	
+    <script>
+    function encode(){
+        this.content.value = encodeURI(this.content.value);
+        return true;
+    }
+    </script>
+    
 	<!-- form -->
 	<h2 id="pages" class="table-title">Input your SCREEN_NAME or ID:</h2>
 	<div class="group"> 
-    <form id="find" action="/neighbourhood" method="post"> 
+    <form id="find" action="/neighbourhood" method="post" onsubmit="return encode.call(this)"> 
         <div> 
             <input type="text" name="content" id="find_i" />
             <input type="submit" value="Find Neighbour" />

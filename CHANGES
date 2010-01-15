@@ -3,6 +3,7 @@
     Added /users for check who used this app, using users.html as its template, add an entry on index.html.
     Fixed some words on the pages in order to be more friendly.
     Now can see avatars on result.html page, so does gender.
+    Fixed the Chinese characters problem.
 
 2010-01-14
     Use a new template index.html now.
