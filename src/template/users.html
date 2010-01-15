@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- navigate top -->
+    <p id="next-prev-top" class="pagination"><span>&laquo;</span> 
+    <span class="next"><a href="/" rel="next">home</a></span> 
+    <span>|</span> 
+    <span class="prev"></span> 
+    <span>&raquo;</span></p> 
+
+    <!-- all users -->    
+    <h2 id="pages" class="table-title">These guys found their neighbour:</h2>
+    <ul class="disclosure table group"> 
+        {% for ren in rens %}
+            <li>
+                <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
+                    {{ ren.user_name }}
+                    <span class="date">{{ ren.date|truncatewords:"1" }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul> 
+    <hr />
+{% endblock %}

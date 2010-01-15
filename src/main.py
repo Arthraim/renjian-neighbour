@@ -1,5 +1,4 @@
 # coding=UTF8
-import cgi
 import os
 
 from google.appengine.ext import webapp
@@ -78,11 +77,20 @@ class Neighbourhood(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
         #self.redirect('/')
 
+        
+class UsersHandler(webapp.RequestHandler):
+    def get(self):
+        rens = db.GqlQuery("SELECT * FROM Renjianer ORDER BY date DESC")
+        template_values = {"rens": rens}
+        path = os.path.join(os.path.dirname(__file__), 'template/users.html')
+        self.response.out.write(template.render(path, template_values))
+
 
 def main():
     application = webapp.WSGIApplication([
                                           ('/', RootHandler),
-                                          ('/neighbourhood', Neighbourhood)
+                                          ('/neighbourhood', Neighbourhood),
+                                          ('/users', UsersHandler)
                                          ],
                                          debug=True)
     util.run_wsgi_app(application)
