@@ -1,3 +1,7 @@
+2010-01-18
+    Added a "/error" handler to catch exeptions, using error.html as template. 
+    Added a favicon, and added the error.html which I fogot last time. 
+
 2010-01-15
     Fixed some problem caused by encoding.
     Added /users for check who used this app, using users.html as its template, add an entry on index.html.
