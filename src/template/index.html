@@ -3,6 +3,10 @@
 {% block content %}	
     <script>
     function encode(){
+        if (this.content.value == "" || this.content.value == null){
+            alert("Why not input something first?");
+            return false;
+        }
         this.content.value = encodeURI(this.content.value);
         return true;
     }
@@ -26,7 +30,7 @@
         {% for ren in rens %}
 	        <li>
 	            <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
-	                {{ ren.user_name }}
+	                @{{ ren.user_name }}
 	                <span class="date">{{ ren.date|truncatewords:"1" }}</span>
 	            </a>
 	        </li>
@@ -35,7 +39,7 @@
             <span>&laquo;</span> 
 			<span class="next"></span> 
 			<span>|</span> 
-			<span class="prev"><a href="/users" >See who else found</a></span> 
+			<span class="prev"><a href="/users" >See more</a></span> 
 			<span>&raquo;</span>
 		</li>
     </ul> 

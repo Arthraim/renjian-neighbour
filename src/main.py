@@ -30,42 +30,47 @@ class RootHandler(webapp.RequestHandler):
 
 class Neighbourhood(webapp.RequestHandler):
     def post(self):
-        screen_name = self.request.get('content')
-        #raise NameError(screen_name)
-        rnjn_url = u'http://api.renjian.com/'
-        # 1、请求user信息
-        user_url = rnjn_url + u'users/show.json?id=' + screen_name;
-        result = urlfetch.fetch(user_url)
-        if result.status_code == 200:
-            json = result.content
-            you = simplejson.loads(json, encoding='UTF-8')
-            ren = Renjianer(key_name=you['screen_name'])
-            ren.user_name = you['screen_name']
-            ren.user_id = you['id']
-        else:
-            you = {'error': result.status_code}
-        # 2、请求左边用户信息
-        user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id - 1);
-        result = urlfetch.fetch(user_url)
-        if result.status_code == 200:
-            json = result.content
-            left = simplejson.loads(json, encoding='UTF-8')
-            ren.left_name = left['screen_name']
-            ren.left_id = left['id']
-        else:
-            you = {'error': result.status_code}
-        # 3、请求右边用户信息
-        user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id + 1);
-        result = urlfetch.fetch(user_url)
-        if result.status_code == 200:
-            json = result.content
-            right = simplejson.loads(json, encoding='UTF-8')
-            ren.right_name = right['screen_name']
-            ren.right_id = right['id']
-        else:
-            you = {'error': result.status_code}
-        
-        ren.put()
+        try:
+            screen_name = self.request.get('content')
+            #raise NameError(screen_name)
+            rnjn_url = u'http://api.renjian.com/'
+            # 1、请求user信息
+            user_url = rnjn_url + u'users/show.json?id=' + screen_name;
+            result = urlfetch.fetch(user_url)
+            if result.status_code == 200:
+                json = result.content
+                you = simplejson.loads(json, encoding='UTF-8')
+                ren = Renjianer(key_name=you['screen_name'])
+                ren.user_name = you['screen_name']
+                ren.user_id = you['id']
+            else:
+                you = {'error': result.status_code}
+            # 2、请求左边用户信息
+            user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id - 1);
+            result = urlfetch.fetch(user_url)
+            if result.status_code == 200:
+                json = result.content
+                left = simplejson.loads(json, encoding='UTF-8')
+                ren.left_name = left['screen_name']
+                ren.left_id = left['id']
+            else:
+                you = {'error': result.status_code}
+            # 3、请求右边用户信息
+            user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id + 1);
+            result = urlfetch.fetch(user_url)
+            if result.status_code == 200:
+                json = result.content
+                right = simplejson.loads(json, encoding='UTF-8')
+                ren.right_name = right['screen_name']
+                ren.right_id = right['id']
+            else:
+                you = {'error': result.status_code}
+            
+            ren.put()
+            
+        except Exception,ex:
+            self.redirect('/error?message=' + 'Exception: ' + unicode(ex));
+            return
         
         template_values = {
             'you': you,
@@ -86,11 +91,22 @@ class UsersHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+class ErrorHandler(webapp.RequestHandler):
+    def get(self):
+        self.request.charset = 'UTF-8'
+        template_values = {
+            'message': self.request.get('message').encode('UTF-8'),
+            }
+        path = os.path.join(os.path.dirname(__file__), 'template/error.html')
+        self.response.out.write(template.render(path, template_values))
+
+
 def main():
     application = webapp.WSGIApplication([
                                           ('/', RootHandler),
                                           ('/neighbourhood', Neighbourhood),
-                                          ('/users', UsersHandler)
+                                          ('/users', UsersHandler),
+                                          ('/error', ErrorHandler)
                                          ],
                                          debug=True)
     util.run_wsgi_app(application)

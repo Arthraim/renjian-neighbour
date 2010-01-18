@@ -57,6 +57,16 @@ p, li {
 	margin:10px;
 	text-shadow: 1px 1px 2px #fff;
 }
+.error-message {
+	color:#ff0000 ! important;
+}
+#error p {
+    color:#333;
+    font-size:1em;
+    line-height:1.5;
+    margin:10px;
+    text-shadow: 1px 1px 2px #fff;
+}
 .table-title {
 	margin-top:20px;
 }

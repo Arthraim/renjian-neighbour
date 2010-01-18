@@ -14,11 +14,12 @@
         {% for ren in rens %}
             <li>
                 <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
-                    {{ ren.user_name }}
-                    <span class="date">{{ ren.date|truncatewords:"1" }}</span>
+                    @{{ ren.user_name }}
+                    <span class="date"> found <strong>@{{ ren.left_name }}</strong> and <strong>@{{ ren.right_name }}</strong> 
+                    on {{ ren.date|truncatewords:"1" }}</span>
                 </a>
             </li>
         {% endfor %}
-    </ul> 
+    </ul>
     <hr />
 {% endblock %}
