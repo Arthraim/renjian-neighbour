@@ -10,6 +10,9 @@ handlers:
 - url: /js
   static_dir: js
   
+- url: /favicon.ico
+  static_dir: favicon.ico
+  
 - url: /.*
   script: main.py
 

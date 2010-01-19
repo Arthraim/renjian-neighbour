@@ -20,14 +20,19 @@
 	<span>&raquo;</span></p> 
 	
     <div id="content" class="group">
-	    <div class="avatar avatar{{ you.gender }}"><img src="{{ you.profile_image_url }}" width="80" /></div>
-        <h1>{{ you.screen_name }}</h1>
-        <p>{{ you.name }} | {{ you.id }}</p>
-        <p class="small">Followers: {{ you.followers_count }} | Following: {{ you.following_count }} | Favorites: {{ you.favourites_count }} | Score: {{ you.score }} | Registered on: {{ you.created_at|truncatewords:"1" }}</p>
-        <h2 id="comments" class="title-divider"><span>Bio:</span></h2> 
-        <p>{{ you.description }}</p> 
-        <p class="small"><cite><a href='{{ you.url }}' class='url' target="_blank">{{ you.url }}</a></cite></p>
-        <div class="clear"></div> 
+        {% if you.error %}
+            <h1 class="error-message">{{ you.error }}</h1>
+            <p>{{ you.message }}</p>
+        {% else %}
+		    <div class="avatar avatar{{ you.gender }}"><img src="{{ you.profile_image_url }}" width="80" /></div>
+	        <h1>{{ you.screen_name }}</h1>
+	        <p>{{ you.name }} | {{ you.id }}</p>
+	        <p class="small">Followers: {{ you.followers_count }} | Following: {{ you.following_count }} | Favorites: {{ you.favourites_count }} | Score: {{ you.score }} | Registered on: {{ you.created_at|truncatewords:"1" }}</p>
+	        <h2 id="comments" class="title-divider"><span>Bio:</span></h2> 
+	        <p>{{ you.description }}</p> 
+	        <p class="small"><cite><a href='{{ you.url }}' class='url' target="_blank">{{ you.url }}</a></cite></p>
+	        <div class="clear"></div>
+	    {% endif %}
     </div> 
 		 
 	<p id="next-prev-bottom" class="pagination"><span>&laquo;</span> 
@@ -43,19 +48,26 @@
 	        <h2 class="table-title" id="recent">Left Neighbour</h2> 
 	        <ul class="disclosure table group"> 
                 <li class="page_item">
-                <a href="http://renjian.com/{{ left.screen_name }}" target="_blank">
-                    <div class="avatar avatar{{ left.gender }}"><img src="{{ left.profile_image_url }}" width="80" /></div>
-                    <h1>{{ left.screen_name }}</h1>
-			        <p>{{ left.name }} | {{ left.id }}</p>
-			        <p class="small">Followers: {{ left.followers_count }} | Following: {{ left.following_count }} | Favorites: {{ left.favourites_count }} | Score: {{ left.score }} | Registered on: {{ left.created_at|truncatewords:"1" }}</p>
-			        <div class="clear"></div> 
-			    </a>
-                </li>
-                <li class="page_item">
-                <a>
-                    <p>{{ left.description }} 
-                    <a href='{{ left.url }}' target="_blank">{{ left.url }}</a></p> 
-                </a>
+                {% if left.error %}
+		            <div id="error">
+                        <p class="error-message">{{ left.error }}</p>
+                        <p>{{ left.message }}</p>
+                    </div>
+		        {% else %}
+		            <a href="http://renjian.com/{{ left.screen_name }}" target="_blank">
+                        <div class="avatar avatar{{ left.gender }}"><img src="{{ left.profile_image_url }}" width="80" /></div>
+                        <h1>{{ left.screen_name }}</h1>
+                        <p>{{ left.name }} | {{ left.id }}</p>
+                        <p class="small">Followers: {{ left.followers_count }} | Following: {{ left.following_count }} | Favorites: {{ left.favourites_count }} | Score: {{ left.score }} | Registered on: {{ left.created_at|truncatewords:"1" }}</p>
+                        <div class="clear"></div> 
+                    </a>
+		        {% endif %}
+	            </li>
+	            <li class="page_item">
+	                <a>
+	                    <p>{{ left.description }} 
+	                    <a href='{{ left.url }}' target="_blank">{{ left.url }}</a></p> 
+	                </a>
                 </li>
 	        </ul> 
 	    </div> 
@@ -64,13 +76,20 @@
 	        <h2 class="table-title" id="pages">Right Neighbour</h2> 
 	        <ul class="disclosure table group"> 
 	            <li class="page_item">
-                <a href="http://renjian.com/{{ right.screen_name }}" target="_blank">
-                    <div class="avatar avatar{{ right.gender }}"><img src="{{ right.profile_image_url }}" width="80" /></div>
-                    <h1>{{ right.screen_name }}</h1>
-                    <p>{{ right.name }} | {{ right.id }}</p>
-                    <p class="small">Followers: {{ right.followers_count }} | Following: {{ right.following_count }} | Favorites: {{ right.favourites_count }} | Score: {{ right.score }} | Registered on: {{ right.created_at|truncatewords:"1" }}</p>
-                    <div class="clear"></div> 
-                </a>
+	            {% if right.error %}
+		            <div id="error">
+			            <p class="error-message">{{ right.error }}</p>
+			            <p>{{ right.message }}</p>
+			        </div>
+	            {% else %}
+	                <a href="http://renjian.com/{{ right.screen_name }}" target="_blank">
+	                    <div class="avatar avatar{{ right.gender }}"><img src="{{ right.profile_image_url }}" width="80" /></div>
+	                    <h1>{{ right.screen_name }}</h1>
+	                    <p>{{ right.name }} | {{ right.id }}</p>
+	                    <p class="small">Followers: {{ right.followers_count }} | Following: {{ right.following_count }} | Favorites: {{ right.favourites_count }} | Score: {{ right.score }} | Registered on: {{ right.created_at|truncatewords:"1" }}</p>
+	                    <div class="clear"></div> 
+	                </a>
+	            {% endif %}
                 </li>
                 <li class="page_item">
                 <a>

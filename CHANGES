@@ -1,3 +1,7 @@
+2010-01-19
+    Added some code to handle the exeptions. Handle the problem when API got error.
+    Fixed @niedhui doesn't have a left neighbour. Also the last user may doesn't have a right neighbour.
+
 2010-01-18
     Added a "/error" handler to catch exeptions, using error.html as template. 
     Added a favicon, and added the error.html which I fogot last time. 
