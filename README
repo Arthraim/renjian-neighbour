@@ -1,16 +1,20 @@
 =renjian-Neighbour=
 
-_A Google App aim to helping user of renjian.com finding neighbourhoods_
+_A app aim to helping user of renjian.com finding neighbourhoods, support GAE and django_
 
 Author: `Arthur Wang <arthraim@gmail.com>`
 
 ==Introduction==
 
-This is a Google App a to helping user of renjian.com finding neighbourhoods.
+This is a webapp a to helping user of renjian.com finding neighbourhoods.
 Neighbour means the IDs are near your ID.
 It's based on the API of renjian.com(http://renjian.com/api.html).
+Now it supports both GAE and django
 
-==Todo==
- 
-*data verify
-*pages
+src : GAE version
+renjian_neighbour: django version 
+
+==Instruction==
+
+deploying GAE is easy.
+deploying django needs setting.py modified. There should be a database for the app, too. 
