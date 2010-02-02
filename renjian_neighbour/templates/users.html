@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- navigate top -->
+    <p id="next-prev-top" class="pagination"><span>&laquo;</span> 
+    <span class="next"><a href="/" rel="next">home</a></span> 
+    <span>|</span> 
+    <span class="prev"></span> 
+    <span>&raquo;</span></p> 
+
+    <!-- all users -->
+	{% if rens %}
+    <h2 id="pages" class="table-title">These guys found their neighbour:</h2>
+    <ul class="disclosure table group"> 
+        {% for ren in rens %}
+            <li>
+                <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
+                    @{{ ren.user_name }}
+                    <span class="date"> found <strong>@{{ ren.left_name }}</strong> and <strong>@{{ ren.right_name }}</strong> 
+                    on {{ ren.date|truncatewords:"1" }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+	{% else %}
+	<h2 id="pages" class="table-title">Nobody has been here before.... Arthur is sad :'(<br/>
+	You can be the first one, right? right?</h2>
+	{% endif %}
+    <hr />
+{% endblock %}

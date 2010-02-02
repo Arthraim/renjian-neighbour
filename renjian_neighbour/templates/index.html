@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}	
+    <script>
+    function encode(){
+        if (this.content.value == "" || this.content.value == null){
+            alert("Why not input something first?");
+            return false;
+        }
+        this.content.value = encodeURI(this.content.value);
+        return true;
+    }
+    </script>
+    
+	<!-- form -->
+	<h2 id="pages" class="table-title">Input your SCREEN_NAME or ID:</h2>
+	<div class="group"> 
+    <form id="find" action="/neighbourhood/" method="post""> 
+        <div> 
+            <input type="text" name="content" id="find_i" />
+            <input type="submit" value="Find Neighbour" />
+        </div> 
+    </form> 
+    </div> 
+    <hr />
+
+    <!-- rencently users -->
+	{% if rens %}
+    <h2 id="pages" class="table-title">Rencently:</h2>
+    <ul class="disclosure table group"> 
+        {% for ren in rens %}
+	        <li>
+	            <a href="http://renjian.com/{{ ren.user_name }}" target="_blank">
+	                @{{ ren.user_name }}
+	                <span class="date">{{ ren.date|truncatewords:"1" }}</span>
+	            </a>
+	        </li>
+        {% endfor %}
+        <li class="pagination">
+            <span>&laquo;</span> 
+			<span class="next"></span> 
+			<span>|</span> 
+			<span class="prev"><a href="/users" >See more</a></span> 
+			<span>&raquo;</span>
+		</li>
+    </ul> 
+    <hr />
+	{% endif %}
+	
+{% endblock %}

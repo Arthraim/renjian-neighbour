@@ -1,3 +1,4 @@
+# coding=UTF8
 # Django settings for neighbour project.
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -10,8 +11,8 @@ MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'renjian_neighbour'             # Or path to database file if using sqlite3.
-DATABASE_USER = 'user'             # Not used with sqlite3.
-DATABASE_PASSWORD = 'pass'         # Not used with sqlite3.
+DATABASE_USER = 'root'             # Not used with sqlite3.
+DATABASE_PASSWORD = '123456'         # Not used with sqlite3.
 DATABASE_HOST = 'localhost'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -25,6 +26,8 @@ TIME_ZONE = 'Asia/Shanghai'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'zh-cn'
+DEFAULT_CHARSET = 'utf8'
+FILE_CHARSET= 'utf8' 
 
 SITE_ID = 1
 
@@ -74,8 +77,9 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
+    #'django.contrib.auth',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.sites',
+    'renjian_neighbour.core',
 )

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- navigate top -->
+    <p id="next-prev-top" class="pagination"><span>&laquo;</span> 
+    <span class="next"><a href="/" rel="next">home</a></span> 
+    <span>|</span> 
+    <span class="prev"></span> 
+    <span>&raquo;</span></p> 
+
+    <!-- all users -->    
+    <h2 id="pages" class="table-title">You got an error:</h2>
+    <ul class="table group"> 
+        <div id="error">
+            <p class="error-message">{{ message }}</p>
+            <p>You can report this error to @<a href="http://renjian.com/arthraim">Arthraim</a> on renjian.com</p>
+        </div>
+    </ul>
+    <hr />
+{% endblock %}
