@@ -1,6 +1,7 @@
 # coding=UTF8
-import os
-from django import template
+#import os
+import urllib2
+#from django.template import 
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.utils import simplejson
@@ -18,41 +19,42 @@ def neighbourhood(request):
         rnjn_url = u'http://api.renjian.com/'
         # 1、请求user信息
         user_url = rnjn_url + u'users/show.json?id=' + screen_name;
-        result = urlfetch.fetch(user_url)
-        if result.status_code == 200:
-            json = result.content
+        try:
+            retval = urllib2.urlopen(user_url)
+            json = retval.read()
             you = simplejson.loads(json, encoding='UTF-8')
-            ren = Renjianer(key_name=you['screen_name'])
+            ren = Renjianer()
             ren.user_name = you['screen_name']
             ren.user_id = you['id']
-        else:
-            you = {'error': 'urlfetch result: ' + unicode(result.status_code)}
+        except urllib2.HTTPError, ex:
+            you = {'error': 'urlfetch result: ' + unicode(ex.code)}
             left = {'error': 'Fetching your infomation fail.' }
             right = {'error': 'Fetching your infomation fail.' }
         
         if not you.has_key('error'):
             # 2、请求左边用户信息
             user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id - 1);
-            result = urlfetch.fetch(user_url)
-            if result.status_code == 200:
-                json = result.content
+            try:
+                retval = urllib2.urlopen(user_url)
+                json = retval.read()
                 left = simplejson.loads(json, encoding='UTF-8')
                 ren.left_name = left['screen_name']
                 ren.left_id = left['id']
-            else:
-                left = {'error': 'urlfetch result: ' + unicode(result.status_code)}
+            except urllib2.HTTPError, ex:
+                left = {'error': 'urlfetch result: ' + unicode(ex.code)}
             # 3、请求右边用户信息
             user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id + 1);
-            result = urlfetch.fetch(user_url)
-            if result.status_code == 200:
-                json = result.content
+            try:
+                retval = urllib2.urlopen(user_url)
+                json = retval.read()
                 right = simplejson.loads(json, encoding='UTF-8')
                 ren.right_name = right['screen_name']
                 ren.right_id = right['id']
-            else:
-                right = {'error': 'urlfetch result: ' + unicode(result.status_code)}
+            except urllib2.HTTPError, ex:
+                right = {'error': 'urlfetch result: ' + unicode(ex.code)}
             # 4、放入数据库
-            ren.put()
+            if ren:
+                ren.save()
 
         if you.has_key('error'):
             you['message'] = "Fetching your infomation fail!<br /> Did you spell your <strong>screen_name</strong> or <strong>id</strong> correctly?"
