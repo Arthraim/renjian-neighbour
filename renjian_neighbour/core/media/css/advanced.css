@@ -283,11 +283,11 @@ ul.table.disclosure .pagination .prev a {
 }
 #footer p#developer-link a,
 #footer p#developer-link a:visited {
-	background:url(http://code.google.com/appengine/images/appengine-silver-120x30.gif) no-repeat left top;
+	background:transparent url(http://renjian.com/images/renjianLogoV2.png) no-repeat left top;
 	float:right;
-	height:30px;
+	height:48px;
 	text-indent:-32697px;
-	width:120px;
+	width:234px;
 }
 /* rounded goodness */
 .group {
