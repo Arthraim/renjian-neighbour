@@ -10,15 +10,16 @@ from core.models import Renjianer
 def indexRequest(request):
     # SELECT * FROM Renjianer ORDER BY date DESC LIMIT 10
     rens = Renjianer.objects.order_by('-date')[0:10]
+    rens.query.group_by = ['user_name']
     return render_to_response('index.html', {"rens": rens})
 
 def neighbourhood(request):
     if request.method == 'POST':
         screen_name = request.POST.get('content')
         #raise NameError(screen_name)
-        rnjn_url = u'http://api.renjian.com/'
+        rnjn_url = 'http://api.renjian.com/'
         # 1、请求user信息
-        user_url = rnjn_url + u'users/show.json?id=' + screen_name;
+        user_url = rnjn_url + 'users/show.json?id=' + screen_name.encode('UTF-8')
         try:
             retval = urllib2.urlopen(user_url)
             json = retval.read()
@@ -27,13 +28,13 @@ def neighbourhood(request):
             ren.user_name = you['screen_name']
             ren.user_id = you['id']
         except urllib2.HTTPError, ex:
-            you = {'error': 'urlfetch result: ' + unicode(ex.code)}
+            you = {'error': 'API request result: ' + unicode(ex.code)}
             left = {'error': 'Fetching your infomation fail.' }
             right = {'error': 'Fetching your infomation fail.' }
         
         if not you.has_key('error'):
             # 2、请求左边用户信息
-            user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id - 1);
+            user_url = rnjn_url + 'users/show.json?id=' + unicode(ren.user_id - 1);
             try:
                 retval = urllib2.urlopen(user_url)
                 json = retval.read()
@@ -41,9 +42,9 @@ def neighbourhood(request):
                 ren.left_name = left['screen_name']
                 ren.left_id = left['id']
             except urllib2.HTTPError, ex:
-                left = {'error': 'urlfetch result: ' + unicode(ex.code)}
+                left = {'error': 'API request result: ' + unicode(ex.code)}
             # 3、请求右边用户信息
-            user_url = rnjn_url + u'users/show.json?id=' + unicode(ren.user_id + 1);
+            user_url = rnjn_url + 'users/show.json?id=' + unicode(ren.user_id + 1);
             try:
                 retval = urllib2.urlopen(user_url)
                 json = retval.read()
@@ -51,7 +52,7 @@ def neighbourhood(request):
                 ren.right_name = right['screen_name']
                 ren.right_id = right['id']
             except urllib2.HTTPError, ex:
-                right = {'error': 'urlfetch result: ' + unicode(ex.code)}
+                right = {'error': 'API request result: ' + unicode(ex.code)}
             # 4、放入数据库
             if ren:
                 ren.save()
@@ -76,7 +77,7 @@ def neighbourhood(request):
 
 #    try:
 #    except Exception,ex:
-#        self.redirect(u'/error?message=' + 'Exception: ' + unicode(ex));
+#        self.redirect('/error?message=' + 'Exception: ' + unicode(ex));
 #        return
 
 

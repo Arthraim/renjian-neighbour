@@ -10,8 +10,8 @@ class Renjianer(models.Model):
     right_name = models.CharField(max_length=255, null=True)
     right_id = models.IntegerField(null=True)
     
-    def __str__(self):
+    def __unicode__(self):
         return self.user_name
     
     class Meta:
-        ordering = ["user_name"]
+        ordering = ["date"]
