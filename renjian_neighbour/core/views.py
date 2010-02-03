@@ -15,7 +15,9 @@ def indexRequest(request):
 
 def neighbourhood(request):
     if request.method == 'POST':
-        screen_name = request.POST.get('content')
+        screen_name = request.POST.get('content').lstrip().rstrip()
+        if not screen_name:
+            return HttpResponseRedirect('/error?message=Did you input anything?')
         #raise NameError(screen_name)
         rnjn_url = 'http://api.renjian.com/'
         # 1、请求user信息
@@ -31,6 +33,8 @@ def neighbourhood(request):
             you = {'error': 'API request result: ' + unicode(ex.code)}
             left = {'error': 'Fetching your infomation fail.' }
             right = {'error': 'Fetching your infomation fail.' }
+        except ValueError, ex:
+            return HttpResponseRedirect('/error?message=User [' + screen_name + '] may not exist. (' + ex.message + ')')
         
         if not you.has_key('error'):
             # 2、请求左边用户信息
@@ -58,7 +62,7 @@ def neighbourhood(request):
                 ren.save()
 
         if you.has_key('error'):
-            you['message'] = "Fetching your infomation fail!<br /> Did you spell your <strong>screen_name</strong> or <strong>id</strong> correctly?"
+            you['message'] = "Fetching your infomation fail!\n Did you spell your screen_name or id correctly?"
         if left.has_key('error'):
             left['message'] = "Finding your left neighbour may got a problem, or you don't even have one :)."
         if right.has_key('error'):
